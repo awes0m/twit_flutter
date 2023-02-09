@@ -24,7 +24,7 @@ class UserAPI implements IUserAPI {
     try {
       await _db.createDocument(
         databaseId: AppwriteConstants.databaseId,
-        collectionId: AppwriteConstants.userColletion,
+        collectionId: AppwriteConstants.userCollection,
         documentId: userModel.uid,
         data: userModel.toMap(),
       );
@@ -46,7 +46,7 @@ class UserAPI implements IUserAPI {
   Future<model.Document> getUserData(String uid) {
     return _db.getDocument(
       databaseId: AppwriteConstants.databaseId,
-      collectionId: AppwriteConstants.userColletion,
+      collectionId: AppwriteConstants.userCollection,
       documentId: uid,
     );
   }

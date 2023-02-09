@@ -4,12 +4,13 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:twit_flutter/common/common.dart';
-import 'package:twit_flutter/constants/constants.dart';
-import 'package:twit_flutter/core/core.dart';
-import 'package:twit_flutter/features/auth/controller/auth_controller.dart';
-import 'package:twit_flutter/features/twit/controller/twit_controller.dart';
-import 'package:twit_flutter/theme/pallete.dart';
+
+import '../../../common/common.dart';
+import '../../../constants/constants.dart';
+import '../../../core/core.dart';
+import '../../../theme/pallete.dart';
+import '../../auth/controller/auth_controller.dart';
+import '../controller/twit_controller.dart';
 
 class CreateTweetScreen extends ConsumerStatefulWidget {
   static route() => MaterialPageRoute(
@@ -34,7 +35,8 @@ class _CreateTweetScreenState extends ConsumerState<CreateTweetScreen> {
 
   void shareTweet() {
     ref.read(tweetControllerProvider.notifier).shareTweet(
-        images: images, text: tweetTextController.text, context: context);
+        images: images, text: tweetTextController.text, context: context, repliedTo: '');
+    Navigator.of(context).pop();
   }
 
   void onPickImages() async {

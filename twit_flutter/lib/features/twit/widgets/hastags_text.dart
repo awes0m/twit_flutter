@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:twit_flutter/theme/pallete.dart';
+import '../../../theme/pallete.dart';
 
 class HashtagText extends StatelessWidget {
   final String text;

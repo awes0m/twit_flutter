@@ -1,13 +1,13 @@
+import 'package:flutter/material.dart';
 // ignore: depend_on_referenced_packages
 import 'package:flutter_dotenv/flutter_dotenv.dart' show dotenv;
-import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'package:twit_flutter/features/auth/controller/auth_controller.dart';
-import 'package:twit_flutter/features/auth/view/signup_view.dart';
-import 'package:twit_flutter/features/home/view/home_view.dart';
-import 'package:twit_flutter/theme/app_theme.dart';
 import 'common/common.dart';
+import 'features/auth/controller/auth_controller.dart';
+import 'features/auth/view/signup_view.dart';
+import 'features/home/view/home_view.dart';
+import 'theme/app_theme.dart';
 
 Future<void> main() async {
   await dotenv.load(fileName: ".env");

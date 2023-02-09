@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 
-import 'package:twit_flutter/core/enums/tweet_type_enum.dart';
+import '../core/enums/tweet_type_enum.dart';
 
 @immutable
 class Tweet {
@@ -15,7 +15,8 @@ class Tweet {
   final List<String> commentIds;
   final String id;
   final int reShareCount;
-
+  final String retweetedBy;
+  final String repliedTo;
   const Tweet({
     required this.text,
     required this.hashtags,
@@ -28,6 +29,8 @@ class Tweet {
     required this.commentIds,
     required this.id,
     required this.reShareCount,
+    required this.retweetedBy,
+    required this.repliedTo,
   });
 
   Tweet copyWith({
@@ -42,6 +45,8 @@ class Tweet {
     List<String>? commentIds,
     String? id,
     int? reShareCount,
+    String? retweetedBy,
+    String? repliedTo,
   }) {
     return Tweet(
       text: text ?? this.text,
@@ -55,22 +60,28 @@ class Tweet {
       commentIds: commentIds ?? this.commentIds,
       id: id ?? this.id,
       reShareCount: reShareCount ?? this.reShareCount,
+      retweetedBy: retweetedBy ?? this.retweetedBy,
+      repliedTo: repliedTo ?? this.repliedTo,
     );
   }
 
   Map<String, dynamic> toMap() {
-    return {
-      'text': text,
-      'hashtags': hashtags,
-      'link': link,
-      'imageLinks': imageLinks,
-      'uid': uid,
-      'tweetType': tweetType.type,
-      'tweetedAt': tweetedAt.millisecondsSinceEpoch,
-      'likes': likes,
-      'commentIds': commentIds,
-      'reShareCount': reShareCount,
-    };
+    final result = <String, dynamic>{};
+
+    result.addAll({'text': text});
+    result.addAll({'hashtags': hashtags});
+    result.addAll({'link': link});
+    result.addAll({'imageLinks': imageLinks});
+    result.addAll({'uid': uid});
+    result.addAll({'tweetType': tweetType.type});
+    result.addAll({'tweetedAt': tweetedAt.millisecondsSinceEpoch});
+    result.addAll({'likes': likes});
+    result.addAll({'commentIds': commentIds});
+    result.addAll({'reShareCount': reShareCount});
+    result.addAll({'retweetedBy': retweetedBy});
+    result.addAll({'repliedTo': repliedTo});
+
+    return result;
   }
 
   factory Tweet.fromMap(Map<String, dynamic> map) {
@@ -86,12 +97,14 @@ class Tweet {
       commentIds: List<String>.from(map['commentIds']),
       id: map['\$id'] ?? '',
       reShareCount: map['reShareCount']?.toInt() ?? 0,
+      retweetedBy: map['retweetedBy'] ?? '',
+      repliedTo: map['repliedTo'] ?? '',
     );
   }
 
   @override
   String toString() {
-    return 'Tweet(text: $text, hashtags: $hashtags, link: $link, imageLinks: $imageLinks, uid: $uid, tweetType: $tweetType, tweetedAt: $tweetedAt, likes: $likes, commentIds: $commentIds, id: $id, reShareCount: $reShareCount)';
+    return 'Tweet(text: $text, hashtags: $hashtags, link: $link, imageLinks: $imageLinks, uid: $uid, tweetType: $tweetType, tweetedAt: $tweetedAt, likes: $likes, commentIds: $commentIds, id: $id, reShareCount: $reShareCount, retweetedBy: $retweetedBy, repliedTo: $repliedTo)';
   }
 
   @override
@@ -109,7 +122,9 @@ class Tweet {
         listEquals(other.likes, likes) &&
         listEquals(other.commentIds, commentIds) &&
         other.id == id &&
-        other.reShareCount == reShareCount;
+        other.reShareCount == reShareCount &&
+        other.retweetedBy == retweetedBy &&
+        other.repliedTo == repliedTo;
   }
 
   @override
@@ -124,6 +139,8 @@ class Tweet {
         likes.hashCode ^
         commentIds.hashCode ^
         id.hashCode ^
-        reShareCount.hashCode;
+        reShareCount.hashCode ^
+        retweetedBy.hashCode ^
+        repliedTo.hashCode;
   }
 }

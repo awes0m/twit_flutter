@@ -2,10 +2,11 @@ import 'dart:io';
 
 import 'package:appwrite/appwrite.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:twit_flutter/constants/appwrite_constants.dart';
-import 'package:twit_flutter/core/core.dart';
 
-final storageAPIProvider = Provider.autoDispose((ref) {
+import '../constants/appwrite_constants.dart';
+import '../core/core.dart';
+
+final storageAPIProvider = Provider((ref) {
   return StorageAPI(storage: ref.read(appwriteStorageProvider));
 });
 
